@@ -1,0 +1,632 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>HFT IPR Async JS, AJAX, Fetch API</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/atom-one-dark.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+	</head>
+	<!-- https://media.giphy.com/media/OvzMNfWETBoKQ/giphy.gif -->
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-size="cover" data-background-image="https://media.giphy.com/media/11wwey5o0EbXTq/giphy.gif">
+					<h1 class="title">IPR</h1>
+					<h3 class="title">AJAX, Async JS, Fetch API</h3>
+				</section>
+				<section>
+					<section data-background-size="cover" data-background-image="https://media.giphy.com/media/lDT56lCmFnTt6/giphy.gif">
+						<h1 class="title"><a style="color: red" href="http://itsalmo.st/#timetohavefinishedallassignments" target="_blank">DONT FAIL</a></h1>
+					</section>
+					<section data-markdown>
+						### UPDATE Termine ( Schein Teil 2 )
+						- 23.11.: Project Pitch, Requirements Engineering
+						- 30.11.: AngularJS & TypeScript
+						- 07.12.: React & React Native
+						- 14.12.: NodeJS
+						- 21.12.: Puffer / Gruppenarbeit / Gastvortrag
+						- 11.01.: 1. Termin Abgabe und Präsentation
+						- 18.01.: 2. Termin Abgabe und Präsentation
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Async JS</h2>
+						Der Umgang mit asynchronem JavaScript kann mit Events, Callbacks und Promises erfolgen
+					</section>
+					<section>
+						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Ajax-vergleich.svg/1170px-Ajax-vergleich.svg.png">
+						<small>Das Modell einer traditionellen Webanwendung (links) im direkten Vergleich mit einer Ajax-Webanwendung (rechts). Sämtliche Anwendungsdaten werden auf dem Server in einer Datenbank und/oder einem Legacy-System abgespeichert.</small>
+					</section>
+					<section>
+						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Prozessfluss-traditionell.svg">
+					</section>
+					<section>
+						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Prozessfluss-ajax.svg">
+					</section>
+					<section>
+						<h2>Funktion, die 2 Zahlen addiert</h2>
+						<pre><code class="js" data-trim data-noescape>
+							// add two numbers normally
+
+							function add (num1, num2) {
+							    return num1 + num2;
+							}
+
+							const result = add(1, 2); // you get result = 3 immediately
+						</code></pre>
+					</section>
+					<section>
+						<h2>Asynchrone Funktion auf dem Server, die 2 Zahlen addiert</h2>
+						<pre><code class="js" data-trim data-noescape>
+							const result = getAddResultFromServer('http://www.example.com?num1=1&num2=2');
+						</code></pre>
+						Problem: Wir wissen nicht, wann die Antwort vom Server kommt!
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Callbacks</h2>
+						<pre><code class="js" data-trim data-noescape>
+							// add two numbers remotely
+							// get the result by calling an API
+
+							function addAsync (num1, num2, callback) {
+							    // use the famous jQuery getJSON callback API
+							    return $.getJSON('http://www.example.com', {
+							        num1: num1,
+							        num2: num2
+							    }, callback);
+							}
+
+							addAsync(1, 2, success => {
+							    // callback
+							    const result = success; // you get result = 3 here
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mehrere Aufrufe der synchronen Funktion</h2>
+						<pre><code class="js" data-trim data-noescape>
+							// add two numbers normally
+
+							let resultA, resultB, resultC;
+
+							 function add (num1, num2) {
+							    return num1 + num2;
+							}
+
+							resultA = add(1, 2); // you get resultA = 3 immediately
+							resultB = add(resultA, 3); // you get resultB = 6 immediately
+							resultC = add(resultB, 4); // you get resultC = 10 immediately
+
+							console.log('total' + resultC);
+							console.log(resultA, resultB, resultC);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mehrere Aufrufe der asynchronen Funktion: Callback Hell</h2>
+						<img height="500px" style="background-color: white; border: 0;" src="https://media.giphy.com/media/Lopx9eUi34rbq/giphy.gif">
+					</section>
+					<section>
+						<pre><code class="js" data-trim data-noescape>
+							// add two numbers remotely
+							// get the result by calling an API
+
+							let resultA, resultB, resultC;
+
+							function addAsync (num1, num2, callback) {
+							    // use the famous jQuery getJSON callback API
+							    return $.getJSON('http://www.example.com', {
+							        num1: num1,
+							        num2: num2
+							    }, callback);
+							}
+
+							addAsync(1, 2, success => {
+							    // callback 1
+							    resultA = success; // you get result = 3 here
+
+							    addAsync(resultA, 3, success => {
+							        // callback 2
+							        resultB = success; // you get result = 6 here
+
+							        addAsync(resultB, 4, success => {
+							            // callback 3
+							            resultC = success; // you get result = 10 here
+
+							            console.log('total' + resultC);
+							            console.log(resultA, resultB, resultC);
+							        });
+							    });
+							});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Promises</h2>
+						Stellt euch vor eure Mutter gibt euch ein Versprechen, dass ihr nächste Woche ein neues Telefon erhaltet.
+						<ul>
+							<li>Es ist unklar wann man das Telefon erhält</li>
+							<li>Es kann sein, dass das Telefon wirklich gekauft wird</li>
+							<li>Es kann sein, dass sie das Telefon doch selbst behält</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Promise Status</h2>
+						<ul>
+							<li>Pending: Es ist unklar wann man das Telefon erhält</li>
+							<li>Resolved: Ihr erhaltet ein neues Telefon</li>
+							<li>Rejected: Ihr erhaltet kein neues Telefon</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Promise erstellen</h2>
+						<pre><code class="js" data-trim data-noescape>
+							/* ES5 */
+							var isMomHappy = false;
+
+							// Promise
+							var willIGetNewPhone = new Promise(
+							    function (resolve, reject) {
+							        if (isMomHappy) {
+							            var phone = {
+							                brand: 'Samsung',
+							                color: 'black'
+							            };
+							            resolve(phone); // fulfilled
+							        } else {
+							            var reason = new Error('mom is not happy');
+							            reject(reason); // reject
+							        }
+
+							    }
+							);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise verwenden</h2>
+						<pre><code class="js" data-trim data-noescape>
+							// call our promise
+							var askMom = function () {
+							    willIGetNewPhone
+							        .then(function (fulfilled) {
+							            // yay, you got a new phone
+							            console.log(fulfilled);
+							         // output: { brand: 'Samsung', color: 'black' }
+							        })
+							        .catch(function (error) {
+							            // oops, mom don't buy it
+							            console.log(error.message);
+							         // output: 'mom is not happy'
+							        });
+							};
+
+							askMom();
+						</code></pre>
+						<a href="https://jsbin.com/nifocu/1/edit?js,console">Demo</a>
+					</section>
+					<section>
+						<h2>Promise chaining (verketten)</h2>
+						<pre><code class="js" data-trim data-noescape>
+							var showOff = function (phone) {
+							    return new Promise(
+							        function (resolve, reject) {
+							            var message = 'Hey friend, I have a new ' +
+							                phone.color + ' ' + phone.brand + ' phone';
+
+							            resolve(message);
+							        }
+							    );
+							};
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise vereinfacht</h2>
+						<pre><code class="js" data-trim data-noescape>
+							var showOff = function (phone) {
+							    var message = 'Hey friend, I have a new ' +
+							                phone.color + ' ' + phone.brand + ' phone';
+
+							    return Promise.resolve(message);
+							};
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise verkettet</h2>
+						<pre><code class="js" data-trim data-noescape>
+							var askMom = function () {
+							    willIGetNewPhone
+							    .then(showOff) // chain it here
+							    .then(function (fulfilled) {
+							            console.log(fulfilled);
+							         // output: 'Hey friend, I have a new black Samsung phone.'
+							        })
+							        .catch(function (error) {
+							            // oops, mom don't buy it
+							            console.log(error.message);
+							         // output: 'mom is not happy'
+							        });
+							};
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise ES6</h2>
+						<pre><code class="js" data-trim data-noescape>
+							/* ES6 */
+							const isMomHappy = true;
+
+							// Promise
+							const willIGetNewPhone = new Promise(
+							    (resolve, reject) => { // fat arrow
+							        if (isMomHappy) {
+							            const phone = {
+							                brand: 'Samsung',
+							                color: 'black'
+							            };
+							            resolve(phone);
+							        } else {
+							            const reason = new Error('mom is not happy');
+							            reject(reason);
+							        }
+
+							    }
+							);
+
+							const showOff = function (phone) {
+							    const message = 'Hey friend, I have a new ' +
+							                phone.color + ' ' + phone.brand + ' phone';
+							    return Promise.resolve(message);
+							};
+
+							// call our promise
+							const askMom = function () {
+							    willIGetNewPhone
+							        .then(showOff)
+							        .then(fulfilled => console.log(fulfilled)) // fat arrow
+							        .catch(error => console.log(error.message)); // fat arrow
+							};
+
+							askMom();
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise ES7 async & await</h2>
+						<pre><code class="js" data-trim data-noescape>
+							/* ES7 */
+							const isMomHappy = true;
+
+							// Promise
+							const willIGetNewPhone = new Promise(
+							    (resolve, reject) => {
+							        if (isMomHappy) {
+							            const phone = {
+							                brand: 'Samsung',
+							                color: 'black'
+							            };
+							            resolve(phone);
+							        } else {
+							            const reason = new Error('mom is not happy');
+							            reject(reason);
+							        }
+
+							    }
+							);
+
+							// 2nd promise
+							async function showOff(phone) {
+							    return new Promise(
+							        (resolve, reject) => {
+							            var message = 'Hey friend, I have a new ' +
+							                phone.color + ' ' + phone.brand + ' phone';
+
+							            resolve(message);
+							        }
+							    );
+							};
+
+							// call our promise
+							async function askMom() {
+							    try {
+							        console.log('before asking Mom');
+
+							        let phone = await willIGetNewPhone;
+							        let message = await showOff(phone);
+
+							        console.log(message);
+							        console.log('after asking mom');
+							    }
+							    catch (error) {
+							        console.log(error.message);
+							    }
+							}
+
+							// IIFE: immediately-invoked function expression
+							(async () => {
+							    await askMom();
+							})();
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise ES6 chaining ähnlich callback hell </h2>
+						<pre><code class="js" data-trim data-noescape>
+							function doubleAfter2Seconds(x) {
+							  return new Promise(resolve => {
+							    setTimeout(() => {
+							      resolve(x * 2);
+							    }, 2000);
+							  });
+							}
+
+							function addPromise(x){
+							  return new Promise(resolve => {
+							    doubleAfter2Seconds(10).then((a) => {
+							      doubleAfter2Seconds(20).then((b) => {
+							        doubleAfter2Seconds(30).then((c) => {
+							          resolve(x + a + b + c);
+							          })
+							      })
+							    })
+							  });
+							}
+
+							addPromise(10).then((sum) => {
+							  console.log(sum);
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Promise ES7 ist besser lesbar, aber nur "syntactic sugar"</h2>
+						<pre><code class="js" data-trim data-noescape>
+							function doubleAfter2Seconds(x) {
+							  return new Promise(resolve => {
+							    setTimeout(() => {
+							      resolve(x * 2);
+							    }, 2000);
+							  });
+							}
+
+							async function addAsync(x) {
+							  const a = await doubleAfter2Seconds(10);
+							  const b = await doubleAfter2Seconds(20);
+							  const c = await doubleAfter2Seconds(30);
+							  return x + a + b + c;
+							}
+
+
+							addAsync(10).then((sum) => {
+							  console.log(sum);
+							});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>AJAX</h2>
+						<ul>
+							<li>AJAX: Asynchronous JavaScript and XML</li>
+							<li>Laden von Daten im Hintergrund und Anzeige auf der Webseite ohne erneutes Laden</li>
+						</ul>
+					</section>
+					<section>
+						<h2>VanillaJS</h2>
+						<pre><code class="js" data-trim data-noescape>
+							var str = "blupp"
+							var xhttp = new XMLHttpRequest();
+						  xhttp.onreadystatechange = function() {
+						    if (this.readyState == 4 && this.status == 200) {
+						    	document.getElementById("txtHint").innerHTML = this.responseText;
+						    }
+						  };
+						  xhttp.open("GET", "meineUrl.php?param="+blupp, true);
+						  xhttp.send();
+						</code></pre>
+					</section>
+					<section>
+						<h2>jQuery</h2>
+						<h3>GET - Holt Daten von einer Resource</h3>
+						<pre><code class="js" data-trim data-noescape>
+							$.get(URL,callback);
+						</code></pre>
+						<pre><code class="js" data-trim data-noescape>
+							$("button").click(function(){
+							    $.get("demo_test.php", function(data, status){
+							        alert("Data: " + data + "\nStatus: " + status);
+							    });
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>jQuery</h2>
+						<h3>POST - Schickt Daten die bearbeitet werden sollen an eine Resource</h3>
+						<pre><code class="js" data-trim data-noescape>
+							$.post(URL,data,callback);
+						</code></pre>
+						<pre><code class="js" data-trim data-noescape>
+							$("button").click(function(){
+							    $.post("demo_test_post.php",
+							    {
+							        name: "Donald Duck",
+							        city: "Duckburg"
+							    },
+							    function(data, status){
+							        alert("Data: " + data + "\nStatus: " + status);
+							    });
+							});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Fetch API</h2>
+						<ul>
+							<li>Neue API, die in aktuellen Browsern implementiert ist</li>
+							<li>Return Wert ist immer ein Promise</li>
+							<li>Fehlerfälle sind angenehm mit try catch abzufangen</li>
+							<li>Keine externe Bibliothek notwendig</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Fetch API Beispiel</h2>
+						<pre><code class="js" data-trim data-noescape>
+							fetch('https://davidwalsh.name/some/url', {
+								method: 'get'
+							}).then(function(response) {
+
+							}).catch(function(err) {
+								// Error :(
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Request Class</h2>
+						<pre><code class="js" data-trim data-noescape>
+							var request = new Request('https://davidwalsh.name/users.json', {
+								method: 'POST',
+								mode: 'cors',
+								redirect: 'follow',
+								headers
+							});
+
+							// Now use it!
+							fetch(request).then(function() { /* handle response */ });
+						</code></pre>
+					</section>
+					<section>
+						<h2>Headers Class</h2>
+						<pre><code class="js" data-trim data-noescape>
+							// Create an empty Headers instance
+							var headers = new Headers();
+
+							// Add a few headers
+							headers.append('Content-Type', 'text/plain');
+							headers.append('X-My-Custom-Header', 'CustomValue');
+
+							// Check, get, and set header values
+							headers.has('Content-Type'); // true
+							headers.get('Content-Type'); // "text/plain"
+							headers.set('Content-Type', 'application/json');
+
+							// Delete a header
+							headers.delete('X-My-Custom-Header');
+
+							// Add initial values
+							var headers = new Headers({
+								'Content-Type': 'text/plain',
+								'X-My-Custom-Header': 'CustomValue'
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mit JSON Umgehen</h2>
+						<pre><code class="js" data-trim data-noescape>
+							fetch('https://davidwalsh.name/demo/arsenal.json').then(function(response) {
+								// Convert to JSON
+								return response.json();
+							}).then(function(j) {
+								// Yay, `j` is a JavaScript object
+								console.log(j);
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mit Text Umgehen</h2>
+						<pre><code class="js" data-trim data-noescape>
+							fetch('/next/page')
+						  .then(function(response) {
+						    return response.text();
+						  }).then(function(text) {
+						  	console.log(text);
+						  });
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mit Blobs Umgehen</h2>
+						<pre><code class="js" data-trim data-noescape>
+							fetch('https://davidwalsh.name/flowers.jpg')
+							.then(function(response) {
+							  return response.blob();
+							})
+							.then(function(imageBlob) {
+							  document.querySelector('img').src = URL.createObjectURL(imageBlob);
+							});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Mit Formulardaten umgehen</h2>
+						<pre><code class="js" data-trim data-noescape>
+							fetch('https://davidwalsh.name/submit', {
+								method: 'post',
+								body: new FormData(document.getElementById('comment-form'))
+							});
+
+							// oder
+
+							fetch('https://davidwalsh.name/submit-json', {
+								method: 'post',
+								body: JSON.stringify({
+									email: document.getElementById('email').value,
+									answer: document.getElementById('answer').value
+								})
+							});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Übung</h2>
+							<ul>
+								<li>Legen Sie auf dem Server ein neues Verzeichnis an: <code class="hljs">~/public_html/JQYAJX/</code></li>
+								<li>Ihr Gästebuch soll nun asynchron funktionieren</li>
+								<li>Ein neuer Eintrag im Gästebuch darf nicht dazu führen, dass die Seite neugeladen wird!</li>
+								<li>Schreiben sie ein PHP Script, dass die JavaScript Anfrage versteht und XML oder JSON zurückliefert</li>
+								<li>Verwenden sie AJAX oder die Fetch API um eine Anfrage an ihr PHP Script zu stellen.</li>
+								<li>Reagieren sie auf den SUCCESS und auf den ERROR Fall, damit ihre Software einwandfrei funktioniert!</li>
+							</ul>
+					</section>
+					<section>
+						<h2>Weitere Links</h2>
+						<ul>
+							<li><a href="https://scotch.io/tutorials/javascript-promises-for-dummies" target="_blank">Promises for dummies</a></li>
+						</ul>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				backgroundTransition: 'slide',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
+transition
