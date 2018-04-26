@@ -12,7 +12,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/atom-one-dark.css">
-
+    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -75,6 +75,21 @@
 				<section>
 					<section>
 						<h2>Callbacks</h2>
+						<pre><code class="js" data-trim data-noescape>
+              // add two numbers remotely
+              // get the result by calling an API
+
+              $.getJSON('http://www.example.com', {
+                num1: num1,
+                num2: num2
+              }, success => {
+                // callback
+                const result = success; // you get result = 3 here
+              })
+						</code></pre>
+					</section>
+					<section>
+						<h2>als Funktion:</h2>
 						<pre><code class="js" data-trim data-noescape>
 							// add two numbers remotely
 							// get the result by calling an API
@@ -159,9 +174,9 @@
 					<section>
 						<h2>Promise Status</h2>
 						<ul>
-							<li>Pending: Es ist unklar wann man das Telefon erhält</li>
-							<li>Resolved: Ihr erhaltet ein neues Telefon</li>
-							<li>Rejected: Ihr erhaltet kein neues Telefon</li>
+							<li>Pending: Ihr seid mitten im Semester 😪</li>
+							<li>Resolved: Klausur success 🙌</li>
+							<li>Rejected: Klausur fail 😐</li>
 						</ul>
 					</section>
 					<section>
@@ -180,7 +195,7 @@
 						</code></pre>
 					</section>
 					<section>
-						<h2>Promise verwenden: neue Syntax</h2>
+						<h2>Promise verwenden: alte Syntax</h2>
 						<pre><code class="js" data-trim data-noescape>
               promise.then(function(result) {
                 console.log(result); // "Stuff worked!"
@@ -199,6 +214,11 @@
                 console.log(err)
               }
             </code></pre>
+          </section>
+          <section>
+            <h2>Deferred</h2>
+            <p data-height="500" data-theme-id="light" data-slug-hash="MGjzLW" data-default-tab="js,result" data-user="maciossek" data-embed-version="2" data-pen-title="MGjzLW" class="codepen">See the Pen <a href="https://codepen.io/maciossek/pen/MGjzLW/">MGjzLW</a> by Mathias Maciossek (<a href="https://codepen.io/maciossek">@maciossek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+            <small>Schlechter Stil: Promises müssen immer etwas zurückliefern!</small>
           </section>
 					<section>
 						<h2>Promise chaining (verketten)</h2>
@@ -296,15 +316,15 @@
 					<section>
 						<h2>Request Class</h2>
 						<pre><code class="js" data-trim data-noescape>
-							var request = new Request('https://davidwalsh.name/users.json', {
-								method: 'POST',
-								mode: 'cors',
-								redirect: 'follow',
-								headers
-							});
+              var request = new Request('https://davidwalsh.name/users.json', {
+                method: 'POST',
+                mode: 'cors',
+                redirect: 'follow',
+                headers
+              });
 
-							// Now use it!
-							const response = await fetch(request)
+              // Now use it!
+              const response = await fetch(request)
 						</code></pre>
 					</section>
 					<section>
@@ -335,7 +355,7 @@
 					<section>
 						<h2>Mit JSON Umgehen</h2>
 						<pre><code class="js" data-trim data-noescape>
-							const response = await fetch('https://davidwalsh.name/demo/arsenal.json')
+              const response = await fetch('https://davidwalsh.name/demo/arsenal.json')
               const json = await response.json()
               console.log(json);
 						</code></pre>
@@ -359,20 +379,20 @@
 					<section>
 						<h2>Mit Formulardaten umgehen</h2>
 						<pre><code class="js" data-trim data-noescape>
-							fetch('https://davidwalsh.name/submit', {
-								method: 'post',
-								body: new FormData(document.getElementById('comment-form'))
-							});
+              fetch('https://davidwalsh.name/submit', {
+                method: 'post',
+                body: new FormData(document.getElementById('comment-form'))
+              });
 
-							// oder
+              // oder
 
-							fetch('https://davidwalsh.name/submit-json', {
-								method: 'post',
-								body: JSON.stringify({
-									email: document.getElementById('email').value,
-									answer: document.getElementById('answer').value
-								})
-							});
+              fetch('https://davidwalsh.name/submit-json', {
+                method: 'post',
+                body: JSON.stringify({
+                  email: document.getElementById('email').value,
+                  answer: document.getElementById('answer').value
+                })
+              });
 						</code></pre>
 					</section>
 				</section>
