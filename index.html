@@ -12,6 +12,11 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/atom-one-dark.css">
+		<style>
+			h1.title, h2.title, h3.title {
+				text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5) ! important;
+			}
+		</style>
     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 		<!-- Printing and PDF exports -->
 		<script>
@@ -28,13 +33,13 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-background-size="cover" data-background-image="https://media.giphy.com/media/T41NT4cwgYBKE/giphy.gif">
+				<section data-background-size="cover" data-background-image="https://media.giphy.com/media/I8E8tPfPuIMVi/giphy.gif">
 					<h1 class="title">IPR</h1>
 					<h3 class="title">AJAX, Async JS, Fetch API</h3>
 				</section>
 				<section>
 					<section data-background-size="cover" data-background-image="https://media.giphy.com/media/lDT56lCmFnTt6/giphy.gif">
-						<h1 class="title"><a style="color: red" href="http://itsalmo.st/#timetohavefinishedallassignments" target="_blank">DONT FAIL</a></h1>
+						<h1 class="title"><a style="color: red" href="https://itsalmo.st/time-to-have-finished-all-assignments" target="_blank">DONT FAIL</a></h1>
 					</section>
 				</section>
 				<section>
@@ -70,6 +75,25 @@
 							const result = getAddResultFromServer('http://www.example.com?num1=1&num2=2');
 						</code></pre>
 						Problem: Wir wissen nicht, wann die Antwort vom Server kommt!
+					</section>
+				</section>
+				<section>
+					<section data-background-size="cover" data-background-image="https://media.giphy.com/media/MuIoBIRU9CCs0/giphy.gif">
+						<h2>Daten von Client zu Server schicken</h2>
+					</section>
+					<section>
+						<h4>GET parameter sind in der URL lesbar</h4>
+						<pre><code class="bash" data-trim data-noescape>
+							curl http://localhost/my-page?parameter=value&anotherParameter=anotherValue
+						</code></pre>
+						<h4>POST Parameter sind nicht in der URL lesbar</h4>
+						<pre><code class="bash" data-trim data-noescape>
+							# form data:
+							curl -X -d "param1=value1&param2=value2" http://localhost/my-page
+
+							# JSON data
+							curl -X -d '{"key1":"value1", "key2":"value2"}' http://localhost/my-page
+						</code></pre>
 					</section>
 				</section>
 				<section>
@@ -253,7 +277,7 @@
 						    	document.getElementById("txtHint").innerHTML = this.responseText;
 						    }
 						  };
-						  xhttp.open("GET", "meineUrl.php?param="+blupp, true);
+						  xhttp.open("GET", "http//:localhost/meineUrl?param="+blupp, true);
 						  xhttp.send();
 						</code></pre>
 					</section>
@@ -265,7 +289,7 @@
 						</code></pre>
 						<pre><code class="js" data-trim data-noescape>
 							$("button").click(function(){
-							    $.get("demo_test.php", function(data, status){
+							    $.get("http//:localhost/demo_test", function(data, status){
 							        alert("Data: " + data + "\nStatus: " + status);
 							    });
 							});
@@ -279,7 +303,7 @@
 						</code></pre>
 						<pre><code class="js" data-trim data-noescape>
 							$("button").click(function(){
-							    $.post("demo_test_post.php",
+							    $.post("http//:localhost/demo_test_post",
 							    {
 							        name: "Donald Duck",
 							        city: "Duckburg"
@@ -398,20 +422,74 @@
 				</section>
 				<section>
 					<section>
+            <h2>Node.js als REST API</h2>
+          </section>
+          <section>
+            <h3>Typisches Layout REST & CRUD</h3>
+            <small>
+            <table>
+              <thead>
+                <tr>
+                  <td>Action</td>
+                  <td>URL Pfad</td>
+                  <td>Parameter</td>
+                  <td>Daten</td>
+                  <td>Request Methode</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Neuer Shout</td>
+                  <td>/api/shouts</td>
+                  <td></td>
+                  <td>{username: 'Batman', message: 'So easy, so simple!'}</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>Liste an Shouts</td>
+                  <td>/api/heroes</td>
+                  <td></td>
+                  <td></td>
+                  <td>GET</td>
+                </tr>
+                <tr>
+                  <td>Einzelnen Shout auslesen</td>
+                  <td>/api/shouts/42</td>
+                  <td>Shout ID</td>
+                  <td></td>
+                  <td>GET</td>
+                </tr>
+                <tr>
+                  <td>Shouts verändern</td>
+                  <td>/api/shouts/42</td>
+                  <td>Shout ID</td>
+                  <td>{username: 'Batman', message: 'We will fulfill Ra's Al Ghul's destiny.'}</td>
+                  <td>PUT</td>
+                </tr>
+                <tr>
+                  <td>Shout löschen</td>
+                  <td>/api/shouts/42</td>
+                  <td>Shout ID</td>
+                  <td></td>
+                  <td>DELETE</td>
+                </tr>
+              </tbody>
+            </table>
+            </small>
+          </section>
+				</section>
+				<section>
+					<section>
 						<h2>Übung</h2>
-							<ul>
-								<li>Legen Sie auf dem Server ein neues Verzeichnis an: <code class="hljs">~/public_html/JQYAJX/</code></li>
-								<li>Ihr Gästebuch soll nun asynchron funktionieren</li>
-								<li>Ein neuer Eintrag im Gästebuch darf nicht dazu führen, dass die Seite neugeladen wird!</li>
-								<li>Schreiben sie ein PHP Script, dass die JavaScript Anfrage versteht und XML oder JSON zurückliefert</li>
-								<li>Verwenden sie AJAX oder die Fetch API um eine Anfrage an ihr PHP Script zu stellen.</li>
-								<li>Reagieren sie auf den SUCCESS und auf den ERROR Fall, damit ihre Software einwandfrei funktioniert!</li>
-							</ul>
+						<ul>
+							<li><a href="#">Async JavaScript Assignment</a></li>
+						</ul>
 					</section>
 					<section>
 						<h2>Weitere Links</h2>
 						<ul>
 							<li><a href="https://scotch.io/tutorials/javascript-promises-for-dummies" target="_blank">Promises for dummies</a></li>
+							<li><a href="https://www.getpostman.com/" target="_blank">Postman</a></li>
 						</ul>
 					</section>
 				</section>
