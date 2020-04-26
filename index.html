@@ -1,66 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-	<head>
-		<meta charset="utf-8">
+    <title>HFT IPR Async JS, AJAX, Fetch API</title>
 
-		<title>HFT IPR Async JS, AJAX, Fetch API</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/hft.css" id="theme" />
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/hft.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/atom-one-dark.css" />
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/atom-one-dark.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+    <script
+      async
+      src="https://production-assets.codepen.io/assets/embed/ei.js"
+    ></script>
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-		<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background-size="cover" data-background-image="https://media.giphy.com/media/I8E8tPfPuIMVi/giphy.gif">
-					<h1 class="title">IPR</h1>
-					<h3 class="title">AJAX, Async JS, Fetch API</h3>
-				</section>
-				<section>
-					<section data-background-size="cover" data-background-image="https://media.giphy.com/media/lDT56lCmFnTt6/giphy.gif">
-						<h1 class="title"><a style="color: red" href="https://itsalmo.st/time-to-have-finished-all-assignments-jmzq" target="_blank">DONT FAIL</a></h1>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Async JS</h2>
-						Der Umgang mit asynchronem JavaScript kann mit Events, Callbacks und Promises erfolgen
-					</section>
-					<section>
-						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Ajax-vergleich.svg/1170px-Ajax-vergleich.svg.png">
-						<small>Das Modell einer traditionellen Webanwendung (links) im direkten Vergleich mit einer Ajax-Webanwendung (rechts). Sämtliche Anwendungsdaten werden auf dem Server in einer Datenbank und/oder einem Legacy-System abgespeichert.</small>
-					</section>
-					<section>
-						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Prozessfluss-traditionell.svg">
-					</section>
-					<section>
-						<img height="500px" style="background-color: white;" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Prozessfluss-ajax.svg">
-					</section>
-					<section>
-						<h2>Funktion, die 2 Zahlen addiert</h2>
-						<pre><code class="js" data-trim data-noescape>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-background-size="cover"
+          data-background-image="https://media.giphy.com/media/I8E8tPfPuIMVi/giphy.gif"
+        >
+          <h1 class="title">IPR</h1>
+          <h3 class="title">AJAX, Async JS, Fetch API</h3>
+        </section>
+        <section>
+          <section
+            data-background-size="cover"
+            data-background-image="https://media.giphy.com/media/lDT56lCmFnTt6/giphy.gif"
+          >
+            <h1 class="title">
+              <a
+                style="color: red;"
+                href="https://itsalmo.st/time-to-have-finished-all-assigments-x77v"
+                target="_blank"
+                >DONT FAIL</a
+              >
+            </h1>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Async JS</h2>
+            Der Umgang mit asynchronem JavaScript kann mit Events, Callbacks und
+            Promises erfolgen
+          </section>
+          <section>
+            <img
+              height="500px"
+              style="background-color: white;"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Ajax-vergleich.svg/1170px-Ajax-vergleich.svg.png"
+            />
+            <small
+              >Das Modell einer traditionellen Webanwendung (links) im direkten
+              Vergleich mit einer Ajax-Webanwendung (rechts). Sämtliche
+              Anwendungsdaten werden auf dem Server in einer Datenbank und/oder
+              einem Legacy-System abgespeichert.</small
+            >
+          </section>
+          <section>
+            <img
+              height="500px"
+              style="background-color: white;"
+              src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Prozessfluss-traditionell.svg"
+            />
+          </section>
+          <section>
+            <img
+              height="500px"
+              style="background-color: white;"
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Prozessfluss-ajax.svg"
+            />
+          </section>
+          <section>
+            <h2>Funktion, die 2 Zahlen addiert</h2>
+            <pre><code class="js" data-trim data-noescape>
 							// add two numbers normally
 
 							function add (num1, num2) {
@@ -69,38 +110,41 @@
 
 							const result = add(1, 2); // you get result = 3 immediately
 						</code></pre>
-					</section>
-					<section>
-						<h2>Asynchrone Funktion auf dem Server, die 2 Zahlen addiert</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Asynchrone Funktion auf dem Server, die 2 Zahlen addiert</h2>
+            <pre><code class="js" data-trim data-noescape>
 							const result = getAddResultFromServer('http://www.example.com?num1=1&num2=2');
 						</code></pre>
-						Problem: Wir wissen nicht, wann die Antwort vom Server kommt!
-					</section>
-				</section>
-				<section>
-					<section data-background-size="cover" data-background-image="https://media.giphy.com/media/MuIoBIRU9CCs0/giphy.gif">
-						<h2>Daten von Client zu Server schicken</h2>
-					</section>
-					<section>
-						<h4>GET parameter sind in der URL lesbar</h4>
-						<pre><code class="bash" data-trim data-noescape>
+            Problem: Wir wissen nicht, wann die Antwort vom Server kommt!
+          </section>
+        </section>
+        <section>
+          <section
+            data-background-size="cover"
+            data-background-image="https://media.giphy.com/media/MuIoBIRU9CCs0/giphy.gif"
+          >
+            <h2>Daten von Client zu Server schicken</h2>
+          </section>
+          <section>
+            <h4>GET parameter sind in der URL lesbar</h4>
+            <pre><code class="bash" data-trim data-noescape>
 							curl http://localhost/my-page?parameter=value&anotherParameter=anotherValue
 						</code></pre>
-						<h4>POST Parameter sind nicht in der URL lesbar</h4>
-						<pre><code class="bash" data-trim data-noescape>
+            <h4>POST Parameter sind nicht in der URL lesbar</h4>
+            <pre><code class="bash" data-trim data-noescape>
 							# form data:
 							curl -X -d "param1=value1&param2=value2" http://localhost/my-page
 
 							# JSON data
 							curl -X -d '{"key1":"value1", "key2":"value2"}' http://localhost/my-page
 						</code></pre>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Callbacks</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Callbacks</h2>
+            <pre><code class="js" data-trim data-noescape>
               // add two numbers remotely
               // get the result by calling an API
 
@@ -112,10 +156,10 @@
                 const result = success; // you get result = 3 here
               })
 						</code></pre>
-					</section>
-					<section>
-						<h2>als Funktion:</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>als Funktion:</h2>
+            <pre><code class="js" data-trim data-noescape>
 							// add two numbers remotely
 							// get the result by calling an API
 
@@ -132,10 +176,10 @@
 							    const result = success; // you get result = 3 here
 							});
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mehrere Aufrufe der synchronen Funktion</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mehrere Aufrufe der synchronen Funktion</h2>
+            <pre><code class="js" data-trim data-noescape>
 							// add two numbers normally
 
 							let resultA, resultB, resultC;
@@ -151,13 +195,17 @@
 							console.log('total' + resultC);
 							console.log(resultA, resultB, resultC);
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mehrere Aufrufe der asynchronen Funktion: Callback Hell</h2>
-						<img height="500px" style="background-color: white; border: 0;" src="https://media.giphy.com/media/Lopx9eUi34rbq/giphy.gif">
-					</section>
-					<section>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mehrere Aufrufe der asynchronen Funktion: Callback Hell</h2>
+            <img
+              height="500px"
+              style="background-color: white; border: 0;"
+              src="https://media.giphy.com/media/Lopx9eUi34rbq/giphy.gif"
+            />
+          </section>
+          <section>
+            <pre><code class="js" data-trim data-noescape>
 							// add two numbers remotely
 							// get the result by calling an API
 
@@ -189,24 +237,28 @@
 							    });
 							});
 						</code></pre>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Promises</h2>
-            <img height="500px" style="background-color: white; border: 0;" src="https://media.giphy.com/media/l1J9wZJLPywQuKovK/giphy.gif">
-					</section>
-					<section>
-						<h2>Promise Status</h2>
-						<ul>
-							<li>Pending: Ihr seid mitten im Semester 😪</li>
-							<li>Resolved: Klausur success 🙌</li>
-							<li>Rejected: Klausur fail 😐</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Promise erstellen</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Promises</h2>
+            <img
+              height="500px"
+              style="background-color: white; border: 0;"
+              src="https://media.giphy.com/media/l1J9wZJLPywQuKovK/giphy.gif"
+            />
+          </section>
+          <section>
+            <h2>Promise Status</h2>
+            <ul>
+              <li>Pending: Ihr seid mitten im Semester 😪</li>
+              <li>Resolved: Klausur success 🙌</li>
+              <li>Rejected: Klausur fail 😐</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Promise erstellen</h2>
+            <pre><code class="js" data-trim data-noescape>
               const promise = new Promise(function(resolve, reject) {
               // do a thing, possibly async, then…
 
@@ -218,20 +270,20 @@
               }
             });
 						</code></pre>
-					</section>
-					<section>
-						<h2>Promise verwenden: alte Syntax</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Promise verwenden: alte Syntax</h2>
+            <pre><code class="js" data-trim data-noescape>
               promise.then(function(result) {
                 console.log(result); // "Stuff worked!"
               }, function(err) {
                 console.log(err); // Error: "It broke"
               });
 						</code></pre>
-					</section>
-					<section>
-						<h2>Promise verwenden: neue Syntax</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Promise verwenden: neue Syntax</h2>
+            <pre><code class="js" data-trim data-noescape>
               try {
                 const result = await promise
                 console.log(result)
@@ -242,12 +294,30 @@
           </section>
           <section>
             <h2>Deferred</h2>
-            <p data-height="500" data-theme-id="light" data-slug-hash="MGjzLW" data-default-tab="js,result" data-user="maciossek" data-embed-version="2" data-pen-title="MGjzLW" class="codepen">See the Pen <a href="https://codepen.io/maciossek/pen/MGjzLW/">MGjzLW</a> by Mathias Maciossek (<a href="https://codepen.io/maciossek">@maciossek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-            <small>Schlechter Stil: Promises müssen immer etwas zurückliefern!</small>
+            <p
+              data-height="500"
+              data-theme-id="light"
+              data-slug-hash="MGjzLW"
+              data-default-tab="js,result"
+              data-user="maciossek"
+              data-embed-version="2"
+              data-pen-title="MGjzLW"
+              class="codepen"
+            >
+              See the Pen
+              <a href="https://codepen.io/maciossek/pen/MGjzLW/">MGjzLW</a> by
+              Mathias Maciossek (<a href="https://codepen.io/maciossek"
+                >@maciossek</a
+              >) on <a href="https://codepen.io">CodePen</a>.
+            </p>
+            <small
+              >Schlechter Stil: Promises müssen immer etwas
+              zurückliefern!</small
+            >
           </section>
-					<section>
-						<h2>Promise chaining (verketten)</h2>
-						<pre><code class="js" data-trim data-noescape>
+          <section>
+            <h2>Promise chaining (verketten)</h2>
+            <pre><code class="js" data-trim data-noescape>
               const anotherPromise = async (aValue) => {
                 return new Promise((resolve, reject) => {
                   resolve(aValue);
@@ -258,19 +328,22 @@
                 .then(anotherPromise)
                 .then(result => console.log(result))
 						</code></pre>
-					</section>
+          </section>
         </section>
-				<section>
-					<section>
-						<h2>AJAX</h2>
-						<ul>
-							<li>AJAX: Asynchronous JavaScript and XML</li>
-							<li>Laden von Daten im Hintergrund und Anzeige auf der Webseite ohne erneutes Laden</li>
-						</ul>
-					</section>
-					<section>
-						<h2>VanillaJS</h2>
-						<pre><code class="js" data-trim data-noescape>
+        <section>
+          <section>
+            <h2>AJAX</h2>
+            <ul>
+              <li>AJAX: Asynchronous JavaScript and XML</li>
+              <li>
+                Laden von Daten im Hintergrund und Anzeige auf der Webseite ohne
+                erneutes Laden
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>VanillaJS</h2>
+            <pre><code class="js" data-trim data-noescape>
 							var str = "blupp"
 							var xhttp = new XMLHttpRequest();
 						  xhttp.onreadystatechange = function() {
@@ -281,28 +354,30 @@
 						  xhttp.open("GET", "http//:localhost/meineUrl?param="+blupp, true);
 						  xhttp.send();
 						</code></pre>
-					</section>
-					<section>
-						<h2>jQuery</h2>
-						<h3>GET - Holt Daten von einer Resource</h3>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>jQuery</h2>
+            <h3>GET - Holt Daten von einer Resource</h3>
+            <pre><code class="js" data-trim data-noescape>
 							$.get(URL,callback);
 						</code></pre>
-						<pre><code class="js" data-trim data-noescape>
+            <pre><code class="js" data-trim data-noescape>
 							$("button").click(function(){
 							    $.get("http//:localhost/demo_test", function(data, status){
 							        alert("Data: " + data + "\nStatus: " + status);
 							    });
 							});
 						</code></pre>
-					</section>
-					<section>
-						<h2>jQuery</h2>
-						<h3>POST - Schickt Daten die bearbeitet werden sollen an eine Resource</h3>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>jQuery</h2>
+            <h3>
+              POST - Schickt Daten die bearbeitet werden sollen an eine Resource
+            </h3>
+            <pre><code class="js" data-trim data-noescape>
 							$.post(URL,data,callback);
 						</code></pre>
-						<pre><code class="js" data-trim data-noescape>
+            <pre><code class="js" data-trim data-noescape>
 							$("button").click(function(){
 							    $.post("http//:localhost/demo_test_post",
 							    {
@@ -314,25 +389,29 @@
 							    });
 							});
 						</code></pre>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Fetch API</h2>
-						<ul>
-							<li>Neue API, die in aktuellen Browsern implementiert ist</li>
-							<li>Return Wert ist immer ein Promise</li>
-							<li>Fehlerfälle sind angenehm mit try catch abzufangen</li>
-							<li>Keine externe Bibliothek notwendig</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Fetch API Support</h2>
-						<img height="500px" style="background-color: white;" src="https://i.imgur.com/fwiQmpu.png" />
-					</section>
-					<section>
-						<h2>Fetch API Beispiel</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Fetch API</h2>
+            <ul>
+              <li>Neue API, die in aktuellen Browsern implementiert ist</li>
+              <li>Return Wert ist immer ein Promise</li>
+              <li>Fehlerfälle sind angenehm mit try catch abzufangen</li>
+              <li>Keine externe Bibliothek notwendig</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Fetch API Support</h2>
+            <img
+              height="500px"
+              style="background-color: white;"
+              src="https://i.imgur.com/fwiQmpu.png"
+            />
+          </section>
+          <section>
+            <h2>Fetch API Beispiel</h2>
+            <pre><code class="js" data-trim data-noescape>
               try {
                 const response = await fetch('https://davidwalsh.name/some/url', {
                   method: 'get'
@@ -341,10 +420,10 @@
                 console.error(e)
               }
 						</code></pre>
-					</section>
-					<section>
-						<h2>Request Class</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Request Class</h2>
+            <pre><code class="js" data-trim data-noescape>
               var request = new Request('https://davidwalsh.name/users.json', {
                 method: 'POST',
                 mode: 'cors',
@@ -355,10 +434,10 @@
               // Now use it!
               const response = await fetch(request)
 						</code></pre>
-					</section>
-					<section>
-						<h2>Headers Class</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Headers Class</h2>
+            <pre><code class="js" data-trim data-noescape>
 							// Create an empty Headers instance
 							var headers = new Headers();
 
@@ -380,34 +459,34 @@
 								'X-My-Custom-Header': 'CustomValue'
 							});
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mit JSON Umgehen</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mit JSON Umgehen</h2>
+            <pre><code class="js" data-trim data-noescape>
               const response = await fetch('https://davidwalsh.name/demo/arsenal.json')
               const json = await response.json()
               console.log(json);
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mit Text Umgehen</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mit Text Umgehen</h2>
+            <pre><code class="js" data-trim data-noescape>
               const response = await fetch('/next/page')
               const text = await response.text()
               console.log(text);
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mit Blobs Umgehen</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mit Blobs Umgehen</h2>
+            <pre><code class="js" data-trim data-noescape>
               const response = await fetch('https://images.unsplash.com/photo-1524303676975-5989d34c6854?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=313a3c6819248cf686124e9caa8a9846&auto=format&fit=crop&w=450&q=80')
               const imageBlob = await response.blob()
               document.querySelector('img').src = URL.createObjectURL(imageBlob);
 						</code></pre>
-					</section>
-					<section>
-						<h2>Mit Formulardaten umgehen</h2>
-						<pre><code class="js" data-trim data-noescape>
+          </section>
+          <section>
+            <h2>Mit Formulardaten umgehen</h2>
+            <pre><code class="js" data-trim data-noescape>
               fetch('https://davidwalsh.name/submit', {
                 method: 'post',
                 body: new FormData(document.getElementById('comment-form'))
@@ -423,105 +502,138 @@
                 })
               });
 						</code></pre>
-					</section>
-				</section>
-				<section>
-					<section>
+          </section>
+        </section>
+        <section>
+          <section>
             <h2>Node.js als REST API</h2>
           </section>
           <section>
             <h3>Typisches Layout REST & CRUD</h3>
             <small>
-            <table>
-              <thead>
-                <tr>
-                  <td>Action</td>
-                  <td>URL Pfad</td>
-                  <td>Parameter</td>
-                  <td>Daten</td>
-                  <td>Request Methode</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Neuer Shout</td>
-                  <td>/api/shouts</td>
-                  <td></td>
-                  <td>{username: 'Batman', message: 'So easy, so simple!'}</td>
-                  <td>POST</td>
-                </tr>
-                <tr>
-                  <td>Liste an Shouts</td>
-                  <td>/api/shouts</td>
-                  <td></td>
-                  <td></td>
-                  <td>GET</td>
-                </tr>
-                <tr>
-                  <td>Einzelnen Shout auslesen</td>
-                  <td>/api/shouts/42</td>
-                  <td>Shout ID</td>
-                  <td></td>
-                  <td>GET</td>
-                </tr>
-                <tr>
-                  <td>Shouts verändern</td>
-                  <td>/api/shouts/42</td>
-                  <td>Shout ID</td>
-                  <td>{username: 'Batman', message: 'We will fulfill Ra's Al Ghul's destiny.'}</td>
-                  <td>PUT</td>
-                </tr>
-                <tr>
-                  <td>Shout löschen</td>
-                  <td>/api/shouts/42</td>
-                  <td>Shout ID</td>
-                  <td></td>
-                  <td>DELETE</td>
-                </tr>
-              </tbody>
-            </table>
+              <table>
+                <thead>
+                  <tr>
+                    <td>Action</td>
+                    <td>URL Pfad</td>
+                    <td>Parameter</td>
+                    <td>Daten</td>
+                    <td>Request Methode</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Neuer Shout</td>
+                    <td>/api/shouts</td>
+                    <td></td>
+                    <td>
+                      {username: 'Batman', message: 'So easy, so simple!'}
+                    </td>
+                    <td>POST</td>
+                  </tr>
+                  <tr>
+                    <td>Liste an Shouts</td>
+                    <td>/api/shouts</td>
+                    <td></td>
+                    <td></td>
+                    <td>GET</td>
+                  </tr>
+                  <tr>
+                    <td>Einzelnen Shout auslesen</td>
+                    <td>/api/shouts/42</td>
+                    <td>Shout ID</td>
+                    <td></td>
+                    <td>GET</td>
+                  </tr>
+                  <tr>
+                    <td>Shouts verändern</td>
+                    <td>/api/shouts/42</td>
+                    <td>Shout ID</td>
+                    <td>
+                      {username: 'Batman', message: 'We will fulfill Ra's Al
+                      Ghul's destiny.'}
+                    </td>
+                    <td>PUT</td>
+                  </tr>
+                  <tr>
+                    <td>Shout löschen</td>
+                    <td>/api/shouts/42</td>
+                    <td>Shout ID</td>
+                    <td></td>
+                    <td>DELETE</td>
+                  </tr>
+                </tbody>
+              </table>
             </small>
           </section>
-				</section>
-				<section>
-					<section>
-						<h2>Weitere Links</h2>
-						<ul>
-							<li><a href="https://scotch.io/tutorials/javascript-promises-for-dummies" target="_blank">Promises for dummies</a></li>
-							<li><a href="https://www.getpostman.com/" target="_blank">Postman</a></li>
-						</ul>
-					</section>
-				</section>
-			</div>
-		</div>
+        </section>
+        <section>
+          <section>
+            <h2>Weitere Links</h2>
+            <ul>
+              <li>
+                <a
+                  href="https://scotch.io/tutorials/javascript-promises-for-dummies"
+                  target="_blank"
+                  >Promises for dummies</a
+                >
+              </li>
+              <li>
+                <a href="https://www.getpostman.com/" target="_blank"
+                  >Postman</a
+                >
+              </li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        transition: "slide", // none/fade/slide/convex/concave/zoom
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/search/search.js', async: true },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-
-		</script>
-
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          {
+            src: "lib/js/classList.js",
+            condition: function () {
+              return !document.body.classList;
+            },
+          },
+          {
+            src: "plugin/markdown/marked.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/markdown/markdown.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+          { src: "plugin/search/search.js", async: true },
+          { src: "plugin/zoom-js/zoom.js", async: true },
+          { src: "plugin/notes/notes.js", async: true },
+        ],
+      });
+    </script>
+  </body>
 </html>
